@@ -1,0 +1,67 @@
+generated: '2026-08-16'
+method: probed
+source: https://www.flyingembers.com/.well-known/openid-configuration
+docs: https://www.flyingembers.com/llms.txt
+summary:
+  types: [none, oauth2, openIdConnect]
+  api_key_in: []
+  oauth2_flows: [authorizationCode, refreshToken, jwtBearer]
+  note: >-
+    Two distinct surfaces with two distinct auth postures. The agent-facing UCP/MCP
+    commerce endpoint is ANONYMOUS — tools/list and read-only catalog calls succeed with
+    no credential. Customer account access uses OIDC/OAuth 2.0 with PKCE against a
+    store-scoped issuer. Payment on complete_checkout is gated by an out-of-band human
+    approval requirement, not by an API credential.
+
+schemes:
+  - name: ucp-mcp-anonymous
+    type: none
+    surface: https://www.flyingembers.com/api/ucp/mcp
+    description: >-
+      No Authorization header is required to POST JSON-RPC to the UCP shopping MCP
+      endpoint. Verified: an anonymous tools/list returned HTTP 200 with 13 tools.
+    required_request_metadata:
+      - field: meta.ucp-agent.profile
+        type: string (uri)
+        description: Agent profile URI used for UCP agent discovery. Required on every tool call.
+      - field: meta.idempotency-key
+        type: string
+        description: Required on complete_checkout only.
+    sources: [mcp/flying-embers-mcp-tools-list.json]
+
+  - name: shopify-customer-accounts-oidc
+    type: openIdConnect
+    openIdConnectUrl: https://www.flyingembers.com/.well-known/openid-configuration
+    issuer: https://shopify.com/authentication/35263676475
+    authorization_endpoint: https://shopify.com/authentication/35263676475/oauth/authorize
+    token_endpoint: https://shopify.com/authentication/35263676475/oauth/token
+    end_session_endpoint: https://shopify.com/authentication/35263676475/logout
+    jwks_uri: https://shopify.com/authentication/35263676475/.well-known/jwks.json
+    grant_types: [authorization_code, refresh_token, 'urn:ietf:params:oauth:grant-type:jwt-bearer']
+    response_types: [code]
+    token_endpoint_auth_methods: [client_secret_basic]
+    pkce_methods: [S256]
+    id_token_signing_alg: [RS256]
+    claims: [iss, sub, aud, exp, iat, nonce, sid, email, email_verified]
+    login_page: https://www.flyingembers.com/account/login
+    description: >-
+      Customer-account authentication for the storefront. The discovery document is served
+      from the merchant's own domain; the issuer is the Shopify platform IdP scoped to this
+      merchant's shop id (35263676475).
+    sources: [well-known/flying-embers-openid-configuration.json]
+
+payment_authorization:
+  model: human-in-the-loop
+  rule: >-
+    The merchant's own /llms.txt and /robots.txt state that agents must not complete
+    checkout, payment or order placement without an explicit, contemporaneous human
+    approval step. Buyer approval is the authorization gate on complete_checkout.
+  alternative: https://shop.app/SKILL.md
+  sources:
+    - https://www.flyingembers.com/llms.txt
+    - https://www.flyingembers.com/robots.txt
+
+x-evidence:
+  - {url: 'https://www.flyingembers.com/.well-known/openid-configuration', http_status: 200}
+  - {url: 'https://www.flyingembers.com/.well-known/oauth-authorization-server', http_status: 200}
+  - {url: 'https://www.flyingembers.com/api/ucp/mcp', http_status: 200, note: anonymous POST tools/list}

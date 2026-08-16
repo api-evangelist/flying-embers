@@ -1,0 +1,21 @@
+generated: '2026-08-16'
+method: searched
+source: https://www.flyingembers.com/llms.txt
+plan_count: 0
+plans: []
+note: >-
+  Flying Embers publishes no API plans, tiers, quotas or developer pricing. The agent
+  surface is a merchant commerce endpoint, not a metered product: the UCP/MCP endpoint at
+  https://www.flyingembers.com/api/ucp/mcp is anonymous and free to call, with a per-IP
+  rate limit and no sign-up, no key issuance and no billing relationship of any kind. The
+  only prices the company publishes are retail product prices for beverages sold through
+  the storefront, which are catalog data, not API plans. This is an honest zero rather
+  than an omission.
+searched:
+  - {url: 'https://www.flyingembers.com/llms.txt', status: 200, finding: 'agent instructions; no API pricing'}
+  - {url: 'https://www.flyingembers.com/agents.md', status: 200, finding: 'same content; no API pricing'}
+  - {url: 'https://developer.flyingembers.com/', status: 000, finding: 'host does not resolve'}
+  - {url: 'https://docs.flyingembers.com/', status: 000, finding: 'host does not resolve'}
+retail_pricing:
+  url: https://www.flyingembers.com/collections/hard-kombucha-all
+  note: Consumer product prices only; not an API plan surface.

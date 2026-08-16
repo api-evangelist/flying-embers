@@ -1,0 +1,35 @@
+generated: '2026-08-16'
+method: probed
+source: https://www.flyingembers.com/.well-known/ucp
+versioning:
+  scheme: date
+  current: '2026-04-08'
+  supported: ['2026-04-08', '2026-01-23']
+  response_header: x-shopify-ucp-mcp-api-version
+  discovery: https://www.flyingembers.com/.well-known/ucp
+  version_pinned_profiles:
+    '2026-04-08': https://www.flyingembers.com/.well-known/ucp/2026-04-08
+    '2026-01-23': https://www.flyingembers.com/.well-known/ucp/2026-01-23
+  detail: >-
+    The merchant profile advertises two concurrently-supported protocol versions and
+    resolves each to its own pinned discovery document, so a client can pin a version and
+    detect the current one from the response header.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  detail: >-
+    No deprecation or sunset policy is published by the merchant for this surface. Version
+    retirement is governed by the Universal Commerce Protocol and the Shopify platform,
+    not by a Flying Embers policy page. No Deprecation pointer is emitted.
+sla:
+  url: null
+  uptime_target: null
+status_page: null
+status_page_probe:
+  url: https://status.flyingembers.com/
+  status: 000
+  detail: Host does not resolve. No status page found; no StatusPage pointer is emitted.
+deprecated_operations: []
+notes:
+  - The commerce surface is platform-managed; the merchant publishes no independent
+    versioning, deprecation, SLA or status commitment of its own.

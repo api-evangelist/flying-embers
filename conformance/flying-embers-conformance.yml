@@ -1,0 +1,76 @@
+generated: '2026-08-16'
+method: probed
+source: https://www.flyingembers.com/.well-known/ucp
+note: >-
+  Standards asserted from documents the merchant actually serves on its own domain — the
+  UCP merchant profile, the OIDC/OAuth discovery documents, and the live MCP tools/list
+  response. No published certification or compliance program was found for this company,
+  so no Compliance pointer is emitted.
+standards:
+  - id: ucp-2026-04-08
+    name: Universal Commerce Protocol
+    conforms: true
+    evidence: >-
+      /.well-known/ucp returns a UCP merchant profile declaring version 2026-04-08 and
+      supported_versions [2026-04-08, 2026-01-23], with dev.ucp.shopping services and
+      checkout/cart/order/fulfillment/discount/catalog capabilities.
+    spec: https://ucp.dev/2026-04-08/specification/overview/
+  - id: mcp
+    name: Model Context Protocol
+    conforms: true
+    evidence: >-
+      POST /api/ucp/mcp with method tools/list returned HTTP 200 and 13 tools, each with a
+      JSON Schema inputSchema.
+  - id: jsonrpc-2.0
+    conforms: true
+    evidence: MCP endpoint speaks JSON-RPC 2.0; responses carry "jsonrpc":"2.0" and the request id.
+  - id: json-schema-2020-12
+    conforms: true
+    evidence: Every tool inputSchema declares $schema https://json-schema.org/draft/2020-12/schema.
+  - id: oidc-discovery
+    name: OpenID Connect Discovery 1.0
+    conforms: true
+    evidence: /.well-known/openid-configuration returns issuer, authorization_endpoint, token_endpoint, jwks_uri, claims_supported, id_token_signing_alg_values_supported [RS256].
+  - id: rfc8414-oauth-authorization-server-metadata
+    conforms: true
+    evidence: /.well-known/oauth-authorization-server returns the same authorization-server metadata document.
+  - id: rfc7636-pkce
+    conforms: true
+    evidence: code_challenge_methods_supported ["S256"].
+  - id: oauth2
+    conforms: true
+    evidence: grant_types_supported [authorization_code, refresh_token, urn:ietf:params:oauth:grant-type:jwt-bearer].
+  - id: llmstxt
+    conforms: true
+    evidence: /llms.txt served as text/markdown with agent instructions; mirrored at /agents.md.
+  - id: iso4217
+    conforms: true
+    evidence: All monetary amounts are integer minor units paired with an ISO 4217 currency code.
+  - id: iso3166-1-alpha-2
+    conforms: true
+    evidence: Address country fields specified as 2-letter ISO 3166-1 alpha-2.
+  - id: bcp47
+    conforms: true
+    evidence: catalog.context.language specified as IETF BCP 47.
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: /.well-known/security.txt returned 404.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Surface uses the JSON-RPC 2.0 error object, not application/problem+json.
+  - id: a2a
+    name: A2A Agent Card
+    conforms: false
+    evidence: /.well-known/agent-card.json and /.well-known/agent.json both returned 404.
+  - id: openapi
+    conforms: false
+    evidence: >-
+      No OpenAPI is published on any probed host. /openapi.json and /swagger.json return
+      404; api., developer. and docs. subdomains do not resolve. The UCP shopping service
+      references an OpenRPC schema hosted by the protocol body (ucp.dev), not by the merchant.
+  - id: idempotency
+    conforms: true
+    evidence: complete_checkout requires meta.idempotency-key.
+  - id: cursor-pagination
+    conforms: true
+    evidence: search_catalog accepts catalog.pagination.cursor + limit and returns pagination.cursor.

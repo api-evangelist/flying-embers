@@ -1,0 +1,18 @@
+generated: '2026-08-16'
+method: searched
+source: registry probes, 2026-08-16
+package_count: 0
+packages: []
+note: >-
+  Flying Embers publishes no first-party client libraries. No GitHub organization exists
+  (api.github.com/orgs/flyingembers returned 404) and a GitHub code search for repositories
+  named flyingembers returned zero results. npm, PyPI and RubyGems return 404 for every
+  plausible package name. This is expected: the company's agent surface is a
+  platform-provided UCP/MCP endpoint that an MCP client calls directly over HTTP, so there
+  is no SDK to ship. No SDKs pointer is emitted.
+probed:
+  - {registry: npm, name: flyingembers, url: 'https://registry.npmjs.org/flyingembers', status: 404, version: null}
+  - {registry: npm, name: '@flyingembers/sdk', url: 'https://registry.npmjs.org/@flyingembers%2Fsdk', status: 404, version: null}
+  - {registry: pypi, name: flyingembers, url: 'https://pypi.org/pypi/flyingembers/json', status: 404, version: null}
+  - {registry: rubygems, name: flying-embers, url: 'https://rubygems.org/api/v1/gems/flying-embers.json', status: 404, version: null}
+  - {registry: github, name: org flyingembers, url: 'https://api.github.com/orgs/flyingembers', status: 404, version: null}

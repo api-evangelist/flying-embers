@@ -1,0 +1,80 @@
+generated: '2026-08-16'
+method: derived
+source: mcp/flying-embers-mcp-tools-list.json
+note: >-
+  Entity graph derived from the JSON Schema input contracts returned by the live UCP/MCP
+  tools/list response. No OpenAPI exists for this surface, so the schemas in the MCP tool
+  definitions are the only machine-readable model the merchant serves.
+entities:
+  - name: product
+    identified_by: id
+    operations: [search_catalog, lookup_catalog, get_product]
+    note: >-
+      Retrieved by identifier or by natural-language query plus filters (categories, price
+      range in minor units, availability). Extended by the dev.shopify.catalog capability
+      on top of dev.ucp.shopping.catalog.search / .lookup.
+  - name: variant
+    identified_by: id
+    operations: [lookup_catalog]
+    note: Products and variants share the lookup-by-identifier surface.
+  - name: cart
+    identified_by: id
+    operations: [create_cart, get_cart, update_cart, cancel_cart]
+    capability: dev.ucp.shopping.cart
+  - name: checkout
+    identified_by: id
+    operations: [create_checkout, get_checkout, update_checkout, complete_checkout, cancel_checkout]
+    capability: dev.ucp.shopping.checkout
+  - name: order
+    identified_by: id
+    operations: [get_order]
+    capability: dev.ucp.shopping.order
+    note: Produced by complete_checkout, which returns an order ID and Thank You Page URL.
+  - name: payment_instrument
+    identified_by: id
+    required_fields: [id, handler_id, type]
+    embedded_in: checkout.payment.instruments
+    note: >-
+      type is 'card' for credit/debit cards or 'token' for wallet payments; handler_id
+      references the payment handler that generated the instrument.
+  - name: payment_handler
+    identified_by: id
+    values: [gpay, shopify.card]
+    source: well-known/flying-embers-ucp.json
+  - name: address
+    embedded_in: [payment_instrument.billing_address, checkout shipping]
+    fields:
+      - street_address
+      - extended_address
+      - address_locality
+      - address_region
+      - postal_code
+      - address_country (ISO 3166-1 alpha-2)
+      - first_name
+      - last_name
+  - name: money
+    shape: '{amount: integer minor units, currency: ISO 4217 code}'
+    note: Value object, not an addressable entity. Used on every priced field.
+  - name: agent_profile
+    identified_by: uri
+    embedded_in: meta.ucp-agent.profile
+    note: Required caller identity on every tool call.
+relationships:
+  - {from: cart, to: product, type: has_many, via: line items}
+  - {from: checkout, to: cart, type: belongs_to, via: cart id}
+  - {from: checkout, to: payment_instrument, type: has_many, via: checkout.payment.instruments}
+  - {from: payment_instrument, to: payment_handler, type: belongs_to, via: handler_id}
+  - {from: payment_instrument, to: address, type: has_one, via: billing_address}
+  - {from: order, to: checkout, type: belongs_to, via: completed checkout id}
+  - {from: product, to: variant, type: has_many, via: variant identifiers}
+lifecycle_flow:
+  - search_catalog / lookup_catalog / get_product
+  - create_cart -> update_cart
+  - create_checkout -> update_checkout (address + shipping method)
+  - complete_checkout (requires meta.idempotency-key AND human approval) -> order
+  - get_order
+gaps:
+  - >-
+    Response schemas are not published in tools/list (MCP tool definitions carry
+    inputSchema only), so field-level response shapes are known from prose descriptions
+    and the UCP capability schemas hosted at ucp.dev, not from the merchant.

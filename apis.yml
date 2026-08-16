@@ -1,23 +1,134 @@
 aid: flying-embers
 name: Flying Embers
-description: 'Flying Embers is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Flying Embers is a Ventura, California beverage company founded in 2017 by Bill Moses
+  (co-founder of KeVita) that brews USDA-organic hard kombucha, canned cocktails and hard
+  seltzers, sold in retail across the United States and direct-to-consumer from
+  flyingembers.com. It is not a software vendor and runs no developer program, but its
+  Shopify-hosted storefront serves a real, live agent surface from its own domain: a
+  Universal Commerce Protocol (UCP) merchant profile at /.well-known/ucp, an anonymous
+  Model Context Protocol endpoint at /api/ucp/mcp exposing 13 catalog, cart, checkout and
+  order tools with full JSON Schema input contracts, a published /llms.txt and /agents.md
+  carrying agent operating instructions, and OIDC/OAuth 2.0 discovery documents for
+  customer accounts. Payment completion is explicitly gated on contemporaneous human
+  approval and on an idempotency key.
+image: https://www.flyingembers.com/cdn/shop/files/fe-social-logo.png?v=1692298714
 url: https://raw.githubusercontent.com/api-evangelist/flying-embers/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-16'
 modified: '2026-08-16'
 tags:
 - Company
-apis: []
+- Commerce
+- E-Commerce
+- Retail
+- Beverages
+- Consumer Packaged Goods
+- Agentic Commerce
+- MCP
+- Shopify
+- Direct to Consumer
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: flying-embers-commerce-mcp
+  name: Flying Embers Commerce API (UCP over MCP)
+  description: >-
+    Anonymous JSON-RPC 2.0 / Model Context Protocol endpoint implementing the Universal
+    Commerce Protocol shopping service (version 2026-04-08). A tools/list call returns 13
+    tools with JSON Schema input contracts covering catalog search and lookup, cart
+    lifecycle, checkout lifecycle and order retrieval. Every call requires an agent profile
+    URI in meta.ucp-agent.profile; complete_checkout additionally requires
+    meta.idempotency-key and explicit human approval of payment.
+  humanURL: https://www.flyingembers.com/agents.md
+  baseURL: https://www.flyingembers.com/api/ucp/mcp
+  tags:
+  - Commerce
+  - MCP
+  - Agentic Commerce
+  - Checkout
+  - Catalog
+  properties:
+  - type: MCPServer
+    url: mcp/flying-embers-mcp.yml
+  - type: Documentation
+    url: https://www.flyingembers.com/agents.md
+- aid: flying-embers-storefront-json
+  name: Flying Embers Storefront Product JSON
+  description: >-
+    Unauthenticated read-only storefront JSON the merchant documents for agents that only
+    need to read store data: product and collection JSON, product search, and the sitemap.
+    Documented in the merchant's own /llms.txt; robots.txt directs agents to the UCP/MCP
+    endpoint for cart and checkout instead.
+  humanURL: https://www.flyingembers.com/llms.txt
+  baseURL: https://www.flyingembers.com
+  tags:
+  - Commerce
+  - Catalog
+  - Products
+  properties:
+  - type: LLMsTxt
+    url: https://www.flyingembers.com/llms.txt
 common:
+- type: DomainSecurity
+  url: security/flying-embers-domain-security.yml
 - type: Website
+  url: https://www.flyingembers.com/
+- type: Documentation
+  url: https://www.flyingembers.com/agents.md
+- type: Blog
+  url: https://www.flyingembers.com/blogs/news
+- type: Support
+  url: https://www.flyingembers.com/pages/contact
+- type: HelpCenter
+  url: https://www.flyingembers.com/pages/faq
+- type: Login
+  url: https://www.flyingembers.com/account/login
+- type: TermsOfService
+  url: https://www.flyingembers.com/policies/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.flyingembers.com/policies/privacy-policy
+- type: MCPServer
+  url: mcp/flying-embers-mcp.yml
+- type: LLMsTxt
+  url: llms/flying-embers-llms.txt
+- type: WellKnown
+  url: well-known/flying-embers-well-known.yml
+- type: Authentication
+  url: authentication/flying-embers-authentication.yml
+- type: OAuthScopes
+  url: scopes/flying-embers-scopes.yml
+- type: Conventions
+  url: conventions/flying-embers-conventions.yml
+- type: Idempotency
+  url: conventions/flying-embers-conventions.yml
+- type: Conformance
+  url: conformance/flying-embers-conformance.yml
+- type: ErrorCatalog
+  url: errors/flying-embers-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/flying-embers-lifecycle.yml
+- type: DataModel
+  url: data-model/flying-embers-data-model.yml
+- type: RateLimits
+  url: rate-limits/flying-embers-rate-limits.yml
+- type: Plans
+  url: plans/flying-embers-plans-pricing.yml
+- type: Packages
+  url: packages/flying-embers-packages.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: SecondaryMarket
+  name: Forge Global listing
   url: https://forgeglobal.com/flying-embers_stock/
+x-enrichment:
+  date: '2026-08-16'
+  status: enriched
+  artifacts_added: 23
+  pass: local-v1
+

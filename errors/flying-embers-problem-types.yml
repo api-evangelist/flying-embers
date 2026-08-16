@@ -1,0 +1,36 @@
+generated: '2026-08-16'
+method: derived
+source: mcp/flying-embers-mcp-tools-list.json
+format: jsonrpc-2.0
+envelope:
+  shape: '{"jsonrpc":"2.0","id":<id>,"error":{"code":<int>,"message":<string>,"data":<any>}}'
+  content_type: application/json
+  note: >-
+    The surface carries the JSON-RPC 2.0 error object defined by MCP. It does NOT use RFC
+    9457 application/problem+json.
+problems:
+  - transport: http
+    status: 429
+    title: Rate limited
+    detail: >-
+      "The MCP endpoint is rate-limited per IP. Back off on 429 responses."
+    remediation: Back off and retry with exponential delay.
+    source: https://www.flyingembers.com/llms.txt
+  - transport: mcp
+    tool: complete_checkout
+    title: Checkout completion errors
+    detail: >-
+      complete_checkout "Returns details about the completed checkout, including order ID,
+      Thank You Page URL, or any errors encountered" — errors are returned in the tool
+      result payload rather than as a JSON-RPC error.
+    source: mcp/flying-embers-mcp-tools-list.json
+gaps:
+  - >-
+    No error-code registry, error reference page or enumerated failure catalogue is
+    published by the merchant for this surface. JSON-RPC standard codes (-32700 parse
+    error, -32600 invalid request, -32601 method not found, -32602 invalid params, -32603
+    internal error) are implied by the protocol but are not asserted here because the
+    provider does not document them.
+  - >-
+    No decline-code reference is published. Payment is delegated to the configured payment
+    handlers (com.google.pay, dev.shopify.card), so no DeclineCodes artifact is emitted.

@@ -1,0 +1,22 @@
+generated: '2026-08-16'
+method: generated
+source: mcp/flying-embers-mcp-tools-list.json
+grounding: >-
+  Flying Embers publishes no OpenAPI. These skills are grounded instead in the 13 tool
+  names and JSON Schema input contracts returned by the live, anonymous UCP/MCP
+  tools/list response at https://www.flyingembers.com/api/ucp/mcp (HTTP 200, 2026-08-16).
+  Every operation named in every skill exists verbatim in that response. No operation,
+  parameter or value is invented.
+skills:
+  - file: flying-embers-browse-catalog.md
+    name: Browse and look up the Flying Embers catalog
+    api: mcp/flying-embers-mcp.yml
+    operations: [search_catalog, lookup_catalog, get_product]
+  - file: flying-embers-build-a-cart.md
+    name: Build and manage a Flying Embers cart
+    api: mcp/flying-embers-mcp.yml
+    operations: [create_cart, get_cart, update_cart, cancel_cart]
+  - file: flying-embers-checkout-with-human-approval.md
+    name: Complete a Flying Embers checkout with human approval
+    api: mcp/flying-embers-mcp.yml
+    operations: [create_checkout, update_checkout, get_checkout, complete_checkout, cancel_checkout, get_order]

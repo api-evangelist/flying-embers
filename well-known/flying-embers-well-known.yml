@@ -1,0 +1,74 @@
+generated: '2026-08-16'
+method: probed
+source: https://www.flyingembers.com/
+host: https://www.flyingembers.com
+documents:
+  - path: /.well-known/ucp
+    status: 200
+    content_type: application/json; charset=utf-8
+    file: flying-embers-ucp.json
+    note: >-
+      Universal Commerce Protocol merchant profile. Names merchant "Flying Embers",
+      merchant_origin www.flyingembers.com; advertises the UCP shopping MCP endpoint,
+      capabilities and payment handlers.
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: application/json; charset=utf-8
+    file: flying-embers-openid-configuration.json
+    note: >-
+      OIDC discovery for the store's customer accounts. Issuer is
+      https://shopify.com/authentication/35263676475 — the platform IdP scoped to this
+      merchant's shop id, served from the merchant's own domain.
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: application/json; charset=utf-8
+    file: flying-embers-oauth-authorization-server.json
+    note: RFC 8414 authorization-server metadata; same store-scoped issuer as above.
+  - path: /.well-known/ucp/2026-04-08
+    status: 200
+    file: null
+    note: Version-pinned UCP profile; content equivalent to the unpinned profile.
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+adjacent:
+  - path: /llms.txt
+    status: 200
+    content_type: text/markdown; charset=utf-8
+    file: ../llms/flying-embers-llms.txt
+  - path: /agents.md
+    status: 200
+    content_type: text/markdown; charset=utf-8
+    file: ../llms/flying-embers-agents.md
+  - path: /robots.txt
+    status: 200
+    note: >-
+      Carries agent policy in comments — points at /agents.md, /.well-known/ucp and
+      /api/ucp/mcp, and forbids automated checkout completion without human approval.
+alternate_hosts:
+  - host: https://flying-embers.myshopify.com
+    documents:
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+      - {path: /openapi.json, status: 404}
+  - host: https://flyingembers.com
+    documents:
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+      - {path: /openapi.json, status: 404}
+  - host: https://api.flyingembers.com
+    documents:
+      - {path: /openapi.json, status: 000, note: host does not resolve}
+notes:
+  - No security.txt is served, so no SecurityTxt pointer is emitted.
+  - >-
+    No A2A agent card exists on any host (all 404), so no a2a/ artifact and no AgentCard
+    pointer were written.
+  - Three /.well-known/ paths returned real JSON documents, so a WellKnown pointer is emitted.

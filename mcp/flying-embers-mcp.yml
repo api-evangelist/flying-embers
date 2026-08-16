@@ -1,0 +1,123 @@
+generated: '2026-08-16'
+method: probed
+source: https://www.flyingembers.com/api/ucp/mcp
+status: published
+name: Flying Embers Commerce MCP (UCP)
+description: >-
+  Flying Embers serves a live, unauthenticated Model Context Protocol endpoint on its own
+  domain as part of the Universal Commerce Protocol (UCP) shopping service. A tools/list
+  call returns 13 real tools with full JSON Schema input contracts covering catalog search
+  and lookup, cart lifecycle, checkout lifecycle, and order retrieval. The surface is
+  provided by the Shopify commerce platform but is served from www.flyingembers.com,
+  advertised by the merchant's own /llms.txt, /agents.md and /robots.txt, and the UCP
+  merchant profile names this merchant explicitly (merchant_name "Flying Embers",
+  merchant_origin www.flyingembers.com).
+
+deployment:
+  mode: remote
+  endpoint: https://www.flyingembers.com/api/ucp/mcp
+  install: null
+  package: null
+  auth: none
+  verified: probed
+
+server:
+  name: flying-embers-ucp-shopping
+  transport: http
+  protocol: MCP over JSON-RPC 2.0
+  url: https://www.flyingembers.com/api/ucp/mcp
+  alternate_url: https://flying-embers.myshopify.com/api/ucp/mcp
+  api_version_header: x-shopify-ucp-mcp-api-version
+  api_version: '2026-04-08'
+  discovery: https://www.flyingembers.com/.well-known/ucp
+  tools_list_file: flying-embers-mcp-tools-list.json
+
+ucp:
+  protocol: Universal Commerce Protocol
+  spec: https://ucp.dev
+  version: '2026-04-08'
+  supported_versions:
+    - '2026-04-08'
+    - '2026-01-23'
+  services:
+    - id: dev.ucp.shopping
+      transport: mcp
+      endpoint: https://flying-embers.myshopify.com/api/ucp/mcp
+      schema: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json
+    - id: dev.ucp.shopping
+      transport: embedded
+      schema: https://ucp.dev/2026-04-08/services/shopping/embedded.openrpc.json
+  capabilities:
+    - dev.ucp.shopping.checkout
+    - dev.ucp.shopping.fulfillment
+    - dev.ucp.shopping.discount
+    - dev.ucp.shopping.cart
+    - dev.ucp.shopping.order
+    - dev.ucp.shopping.catalog.search
+    - dev.ucp.shopping.catalog.lookup
+    - dev.shopify.catalog
+  payment_handlers:
+    - com.google.pay
+    - dev.shopify.card
+
+tools:
+  - name: search_catalog
+    category: catalog
+    description: Search products from the online store by natural-language query and/or filters. Cursor-paginated.
+  - name: lookup_catalog
+    category: catalog
+    description: Look up multiple products or variants by identifier.
+  - name: get_product
+    category: catalog
+    description: Retrieve complete product detail by identifier.
+  - name: create_cart
+    category: cart
+    description: Creates a new cart.
+  - name: get_cart
+    category: cart
+    description: Get the cart contents.
+  - name: update_cart
+    category: cart
+    description: Perform updates to a cart.
+  - name: cancel_cart
+    category: cart
+    description: Cancels a cart.
+  - name: create_checkout
+    category: checkout
+    description: Creates a checkout; returns line items, totals, discounts and taxes.
+  - name: get_checkout
+    category: checkout
+    description: Returns details about the checkout, including line items, totals, discounts and taxes.
+  - name: update_checkout
+    category: checkout
+    description: Updates a checkout (shipping address, method, buyer details).
+  - name: complete_checkout
+    category: checkout
+    description: >-
+      Completes a checkout and returns the order ID / Thank You Page URL. REQUIRES a
+      meta.idempotency-key and explicit contemporaneous buyer approval of payment.
+  - name: cancel_checkout
+    category: checkout
+    description: Cancels a checkout.
+  - name: get_order
+    category: order
+    description: Get the details of an order.
+
+notes:
+  - Every tool requires a meta.ucp-agent.profile URI (agent profile URI for UCP discovery).
+  - complete_checkout additionally requires meta.idempotency-key (string).
+  - Money is expressed as an integer in ISO 4217 minor units paired with a currency code.
+  - The merchant's llms.txt and robots.txt both state that checkout/payment must not be
+    completed without explicit, contemporaneous human approval.
+  - Platform-provided surface. This is the Shopify UCP implementation, served on the
+    merchant's own domain and scoped to the merchant's own catalog (shop id 35263676475).
+
+x-evidence:
+  fetched: '2026-08-16'
+  url: https://www.flyingembers.com/api/ucp/mcp
+  method: POST
+  body: '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+  http_status: 200
+  content_type: application/json; charset=utf-8
+  response_bytes: 47909
+  tool_count: 13
