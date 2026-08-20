@@ -70,6 +70,10 @@ apis:
   tags:
   - Commerce
   - Catalog
+  - Product
+  tags_raw:
+  - Commerce
+  - Catalog
   - Products
   properties:
   - type: LLMsTxt
