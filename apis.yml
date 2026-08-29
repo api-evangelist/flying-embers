@@ -12,6 +12,17 @@ description: >-
   carrying agent operating instructions, and OIDC/OAuth 2.0 discovery documents for
   customer accounts. Payment completion is explicitly gated on contemporaneous human
   approval and on an idempotency key.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.flyingembers.com/cdn/shop/files/fe-social-logo.png?v=1692298714
 url: https://raw.githubusercontent.com/api-evangelist/flying-embers/refs/heads/main/apis.yml
 x-type: company
