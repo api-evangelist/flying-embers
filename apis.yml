@@ -23,6 +23,21 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  - scopes
+  - rate-limits
+  - security
+  generated: '2026-09-02'
+  method: derived
 image: https://www.flyingembers.com/cdn/shop/files/fe-social-logo.png?v=1692298714
 url: https://raw.githubusercontent.com/api-evangelist/flying-embers/refs/heads/main/apis.yml
 x-type: company
