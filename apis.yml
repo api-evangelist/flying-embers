@@ -1,17 +1,14 @@
 aid: flying-embers
 name: Flying Embers
-description: >-
-  Flying Embers is a Ventura, California beverage company founded in 2017 by Bill Moses
-  (co-founder of KeVita) that brews USDA-organic hard kombucha, canned cocktails and hard
-  seltzers, sold in retail across the United States and direct-to-consumer from
-  flyingembers.com. It is not a software vendor and runs no developer program, but its
-  Shopify-hosted storefront serves a real, live agent surface from its own domain: a
-  Universal Commerce Protocol (UCP) merchant profile at /.well-known/ucp, an anonymous
-  Model Context Protocol endpoint at /api/ucp/mcp exposing 13 catalog, cart, checkout and
-  order tools with full JSON Schema input contracts, a published /llms.txt and /agents.md
-  carrying agent operating instructions, and OIDC/OAuth 2.0 discovery documents for
-  customer accounts. Payment completion is explicitly gated on contemporaneous human
-  approval and on an idempotency key.
+description: 'Flying Embers is a Ventura, California beverage company founded in 2017 by Bill Moses (co-founder
+  of KeVita) that brews USDA-organic hard kombucha, canned cocktails and hard seltzers, sold in retail
+  across the United States and direct-to-consumer from flyingembers.com. It is not a software vendor and
+  runs no developer program, but its Shopify-hosted storefront serves a real, live agent surface from
+  its own domain: a Universal Commerce Protocol (UCP) merchant profile at /.well-known/ucp, an anonymous
+  Model Context Protocol endpoint at /api/ucp/mcp exposing 13 catalog, cart, checkout and order tools
+  with full JSON Schema input contracts, a published /llms.txt and /agents.md carrying agent operating
+  instructions, and OIDC/OAuth 2.0 discovery documents for customer accounts. Payment completion is explicitly
+  gated on contemporaneous human approval and on an idempotency key.'
 deliveryModel:
   model: saas
   open_source: false
@@ -62,15 +59,13 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 apis:
-- aid: flying-embers-commerce-mcp
+- aid: flying-embers:flying-embers-commerce-mcp
   name: Flying Embers Commerce API (UCP over MCP)
-  description: >-
-    Anonymous JSON-RPC 2.0 / Model Context Protocol endpoint implementing the Universal
-    Commerce Protocol shopping service (version 2026-04-08). A tools/list call returns 13
-    tools with JSON Schema input contracts covering catalog search and lookup, cart
-    lifecycle, checkout lifecycle and order retrieval. Every call requires an agent profile
-    URI in meta.ucp-agent.profile; complete_checkout additionally requires
-    meta.idempotency-key and explicit human approval of payment.
+  description: Anonymous JSON-RPC 2.0 / Model Context Protocol endpoint implementing the Universal Commerce
+    Protocol shopping service (version 2026-04-08). A tools/list call returns 13 tools with JSON Schema
+    input contracts covering catalog search and lookup, cart lifecycle, checkout lifecycle and order retrieval.
+    Every call requires an agent profile URI in meta.ucp-agent.profile; complete_checkout additionally
+    requires meta.idempotency-key and explicit human approval of payment.
   humanURL: https://www.flyingembers.com/agents.md
   baseURL: https://www.flyingembers.com/api/ucp/mcp
   tags:
@@ -84,13 +79,12 @@ apis:
     url: mcp/flying-embers-mcp.yml
   - type: Documentation
     url: https://www.flyingembers.com/agents.md
-- aid: flying-embers-storefront-json
+- aid: flying-embers:flying-embers-storefront-json
   name: Flying Embers Storefront Product JSON
-  description: >-
-    Unauthenticated read-only storefront JSON the merchant documents for agents that only
-    need to read store data: product and collection JSON, product search, and the sitemap.
-    Documented in the merchant's own /llms.txt; robots.txt directs agents to the UCP/MCP
-    endpoint for cart and checkout instead.
+  description: 'Unauthenticated read-only storefront JSON the merchant documents for agents that only
+    need to read store data: product and collection JSON, product search, and the sitemap. Documented
+    in the merchant''s own /llms.txt; robots.txt directs agents to the UCP/MCP endpoint for cart and checkout
+    instead.'
   humanURL: https://www.flyingembers.com/llms.txt
   baseURL: https://www.flyingembers.com
   tags:
@@ -161,4 +155,3 @@ x-enrichment:
   status: enriched
   artifacts_added: 23
   pass: local-v1
-
