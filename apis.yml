@@ -79,6 +79,9 @@ apis:
     url: mcp/flying-embers-mcp.yml
   - type: Documentation
     url: https://www.flyingembers.com/agents.md
+  x-surface: platform-generated
+  x-platform: shopify
+  x-platform-surface: ucp
 - aid: flying-embers:flying-embers-storefront-json
   name: Flying Embers Storefront Product JSON
   description: 'Unauthenticated read-only storefront JSON the merchant documents for agents that only
@@ -86,7 +89,6 @@ apis:
     in the merchant''s own /llms.txt; robots.txt directs agents to the UCP/MCP endpoint for cart and checkout
     instead.'
   humanURL: https://www.flyingembers.com/llms.txt
-  baseURL: https://www.flyingembers.com
   tags:
   - Commerce
   - Catalog
@@ -98,6 +100,9 @@ apis:
   properties:
   - type: LLMsTxt
     url: https://www.flyingembers.com/llms.txt
+  x-surface: platform-generated
+  x-platform: shopify
+  x-platform-surface: storefront-json
 common:
 - type: DomainSecurity
   url: security/flying-embers-domain-security.yml
