@@ -1,0 +1,16 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/flying-embers/integrations
+- https://n8n.io/integrations/flying-embers/
+- https://composio.dev/toolkits/flying-embers
+- https://monid.ai/tools/flying-embers
+checked:
+- https://composio.dev/toolkits/flying-embers
+- https://monid.ai/tools/flying-embers
+- https://n8n.io/integrations/flying-embers/
+- https://zapier.com/apps/flying-embers/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
