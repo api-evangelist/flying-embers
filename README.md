@@ -64,5 +64,116 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Flying Embers is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/flying-embers_stock/
+Flying Embers is a Ventura, California beverage company founded in 2017 by Bill Moses (co-founder of KeVita) that brews USDA-organic hard kombucha, canned cocktails and hard seltzers, sold in retail across the United States and direct-to-consumer from flyingembers.com. It is not a software vendor and runs no developer program, but its Shopify-hosted storefront serves a real, live agent surface from its own domain: a Universal Commerce Protocol (UCP) merchant profile at /.well-known/ucp, an anonymous Model Context Protocol endpoint at /api/ucp/mcp exposing 13 catalog, cart, checkout and order tools with full JSON Schema input contracts, a published /llms.txt and /agents.md carrying agent operating instructions, and OIDC/OAuth 2.0 discovery documents for customer accounts. Payment completion is explicitly gated on contemporaneous human approval and on an idempotency key.
+
+**Areas:** Company · Commerce · E-Commerce · Retail · Beverages · Consumer Packaged Goods · Agentic Commerce · MCP · Shopify · Direct to Consumer
+
+## Flying Embers on APIs.io
+
+Everything profiled for Flying Embers is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/flying-embers/](https://apis.io/providers/flying-embers/)** — or go straight to one of the APIs or properties below.
+
+### APIs (2)
+
+- [Flying Embers Commerce API (UCP over MCP)](https://apis.io/apis/flying-embers/flying-embers-commerce-mcp/) — Anonymous JSON-RPC 2.0 / Model Context Protocol endpoint implementing the Universal Commerce Protocol shopping service (version 2026-04-08). A tools/list…
+- [Flying Embers Storefront Product JSON](https://apis.io/apis/flying-embers/flying-embers-storefront-json/) — Unauthenticated read-only storefront JSON the merchant documents for agents that only need to read store data: product and collection JSON, product search,…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [flying-embers-ucp-shopping](https://apis.io/servers/flying-embers/flying-embers-ucp-shopping/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Flying Embers Authentication](https://apis.io/security/flying-embers/flying-embers-authentication/)
+- [Flying Embers Domain Security](https://apis.io/security/flying-embers/flying-embers-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Flying Embers Scopes](https://apis.io/scopes/flying-embers/flying-embers-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Flying Embers Plans Pricing](https://apis.io/plans/flying-embers/flying-embers-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Flying Embers Rate Limits](https://apis.io/rate-limits/flying-embers/flying-embers-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.flyingembers.com/)
+- [Documentation](https://www.flyingembers.com/agents.md)
+- [Support](https://www.flyingembers.com/pages/contact)
+- [Blog](https://www.flyingembers.com/blogs/news)
+- [Terms of service](https://www.flyingembers.com/policies/terms-of-service)
+- [Privacy policy](https://www.flyingembers.com/policies/privacy-policy)
+
+## API Evangelist rating
+
+**Kin Score 26.1** — emerging · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.7 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 21.1 |
+| Developer ergonomics | 30.4 |
+| Access clarity | 27.6 |
+
+**Agent readiness 21.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | platform (partial credit) |
+| Auth Clarity | served (partial credit) |
+| Idempotency | documented (partial credit) |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | platform (partial credit) |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 34.3** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/flying-embers/](https://apis.io/providers/flying-embers/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Flying Embers: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/flying-embers/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
